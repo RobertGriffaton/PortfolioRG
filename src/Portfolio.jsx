@@ -1,6 +1,3 @@
-// CORRECTIF: Scroll fluide, offset pour la navbar, et correspondance des ids dans la nav.
-// Utilise la version suivante pour un scroll précis et une navigation qui fonctionne vraiment sur chaque section !
-
 import "@fontsource/poppins";
 import AOS from "aos";
 import "aos/dist/aos.css";
@@ -8,6 +5,7 @@ import { useEffect, useState } from "react";
 import {
   FaArrowRight,
   FaBars,
+  FaChessKnight,
   FaCss3Alt,
   FaEnvelope,
   FaGitAlt,
@@ -16,10 +14,14 @@ import {
   FaHtml5,
   FaJava,
   FaLinkedin,
+  FaMusic,
   FaNodeJs,
   FaReact,
+  FaRegCircle,
   FaRegFileAlt,
+  FaRunning,
   FaSchool,
+  FaStar,
 } from "react-icons/fa";
 import {
   SiExpress,
@@ -38,6 +40,17 @@ import {
   SiVscodium,
 } from "react-icons/si";
 
+const navLinks = [
+  { id: "about", label: "À propos" },
+  { id: "skills", label: "Compétences" },
+  { id: "parcours", label: "Parcours" },
+  { id: "interets", label: "Centres d’intérêts" },
+  { id: "but-competences", label: "Compétences BUT" },
+  { id: "experience", label: "Expérience" },
+  { id: "projects", label: "Projets" },
+  { id: "contact", label: "Contact" },
+];
+
 const skills = [
   { name: "React", icon: <FaReact className="text-sky-400" /> },
   { name: "JavaScript", icon: <SiJavascript className="text-yellow-400" /> },
@@ -50,116 +63,299 @@ const skills = [
   { name: "CSS", icon: <FaCss3Alt className="text-blue-400" /> },
 ];
 
-const projects = [
+const butCompetences = [
   {
-    title: "Gestion d'une application complète",
-    image: "/images/gestion-app.png",
+    titre: "Réaliser un développement d'application",
     description:
-      "Application web pour gérer des utilisateurs et des tâches, avec authentification, back office et interface responsive.",
-    tech: [
-      { icon: <FaReact className="text-sky-400" />, name: "React" },
-      { icon: <FaNodeJs className="text-green-500" />, name: "Node.js" },
-      { icon: <SiMongodb className="text-green-600" />, name: "MongoDB" },
-      {
-        icon: <SiTailwindcss className="text-sky-300" />,
-        name: "Tailwind CSS",
-      },
-    ],
-    github: "https://github.com/griffatonr/gestion-app",
+      "Développer des applications web et logicielles adaptées aux besoins utilisateurs.",
+    niveau: 4,
   },
   {
-    title: "Interface de gestion d’étudiants",
+    titre: "Optimiser des applications informatiques",
+    description:
+      "Analyser et améliorer les performances et la qualité des applications.",
+    niveau: 4,
+  },
+  {
+    titre: "Administrer des systèmes informatiques communicants complexes",
+    description:
+      "Configurer, sécuriser et maintenir des systèmes réseaux avancés.",
+    niveau: 2,
+  },
+  {
+    titre: "Gérer des données de l'information",
+    description: "Modéliser, organiser et exploiter efficacement les données.",
+    niveau: 3,
+  },
+  {
+    titre: "Conduire un projet",
+    description:
+      "Planifier, organiser et piloter des projets informatiques en équipe.",
+    niveau: 4,
+  },
+  {
+    titre: "Travailler dans une équipe informatique",
+    description:
+      "Collaborer efficacement, communiquer et s’intégrer dans une équipe de développement.",
+    niveau: 5,
+  },
+];
+
+const projects = [
+  {
+    title: "Intranet MOA – Ramsay Santé",
+    image: "/images/intranet.png",
+    description:
+      "Développement d’un intranet collaboratif lors de mon stage au service MOA (Cergy) : recueil de besoins, conception, gestion des accès, communication interne et autonomie sur le projet.",
+    tech: [
+      { icon: <FaReact className="text-sky-400" />, name: "React" },
+      {
+        icon: <SiJavascript className="text-yellow-400" />,
+        name: "JavaScript",
+      },
+      { icon: <FaNodeJs className="text-green-500" />, name: "Node.js" },
+    ],
+    github: "https://github.com/RobertGriffaton",
+  },
+  {
+    title: "Application de Chat Annotée",
+    image: "/images/chat-app.png",
+    description:
+      "Projet d’équipe (BUT) : application de messagerie avec fonctionnalités avancées (annotation, gestion d’utilisateurs, temps réel avec sockets).",
+    tech: [
+      { icon: <FaReact className="text-sky-400" />, name: "React" },
+      { icon: <SiSocketdotio className="text-gray-300" />, name: "Socket.io" },
+      { icon: <FaNodeJs className="text-green-500" />, name: "Node.js" },
+    ],
+    github: "https://github.com/RobertGriffaton",
+  },
+  {
+    title: "Calculatrice Java & POO",
+    image: "/images/java-calc.png",
+    description:
+      "Application de calculatrice arithmétique réalisée en Java : modularité, interface graphique, structuration orientée objet et robustesse du code.",
+    tech: [{ icon: <FaJava className="text-red-400" />, name: "Java" }],
+    github: "https://github.com/RobertGriffaton",
+  },
+  {
+    title: "Gestion d’étudiants Firebase",
     image: "/images/gestion-etudiants.png",
     description:
-      "Dashboard permettant de créer, modifier et supprimer des étudiants, stockage Firebase, design moderne.",
+      "Dashboard pour gérer une base d’étudiants : CRUD, authentification, sauvegarde cloud sur Firebase, design épuré.",
     tech: [
       { icon: <FaReact className="text-sky-400" />, name: "React" },
       { icon: <SiFirebase className="text-yellow-500" />, name: "Firebase" },
     ],
-    github: "https://github.com/griffatonr/etudiants",
+    github: "https://github.com/RobertGriffaton",
   },
   {
     title: "Simulation réseau Python",
     image: "/images/simulation-reseau.png",
     description:
-      "Projet de simulation de communication entre machines pour apprendre le fonctionnement des sockets réseau.",
+      "Simulation de communication entre machines pour comprendre les protocoles réseau et les bases de la cybersécurité.",
     tech: [
       { icon: <SiPython className="text-blue-400" />, name: "Python" },
       { icon: <SiSocketdotio className="text-gray-300" />, name: "Sockets" },
     ],
-    github: "https://github.com/griffatonr/simulation-reseau",
+    github: "https://github.com/RobertGriffaton",
   },
 ];
 
-// NOUVEL ORDRE navLinks pour matcher l'ordre d'apparition sur la page !
-const navLinks = [
-  { id: "about", label: "À propos" },
-  { id: "parcours", label: "Parcours" },
-  { id: "goals", label: "Objectifs" },
-  { id: "skills", label: "Compétences" },
-  { id: "experience", label: "Expérience" },
-  { id: "projects", label: "Projets" },
-  { id: "contact", label: "Contact" },
+// -------- INTERESTS -----------
+const interests = [
+  {
+    icon: (
+      <FaMusic className="text-pink-400 text-5xl transition-transform group-hover:rotate-12" />
+    ),
+    title: "Musique",
+    description:
+      "Pianiste et diplômé de solfège (Conservatoire de Sarcelles). La musique nourrit ma créativité, ma discipline et ma concentration.",
+  },
+  {
+    icon: (
+      <FaChessKnight className="text-yellow-400 text-5xl transition-transform group-hover:-rotate-6" />
+    ),
+    title: "Échecs",
+    description:
+      "Joueur régulier, les échecs m’apprennent la logique, la mémoire, l’anticipation et la gestion de stress..",
+  },
+  {
+    icon: (
+      <FaRunning className="text-emerald-400 text-5xl transition-transform group-hover:scale-110" />
+    ),
+    title: "Sport",
+    description:
+      "Les sports collectifs et le running. L’esprit d’équipe et le goût de l’effort sont des valeurs importantes pour moi.",
+  },
 ];
 
-const Loader = () => (
-  <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black">
-    <div className="animate-spin rounded-full border-t-4 border-blue-500 border-b-4 border-gray-800 h-16 w-16 mb-4"></div>
-    <span
-      className="ml-4 text-xl text-blue-400 font-bold tracking-wide"
-      style={{ fontFamily: "Poppins, sans-serif" }}
-    >
-      Griffy...
-    </span>
-  </div>
-);
-
-const ProjectCard = ({ project }) => (
-  <div className="bg-neutral-900 rounded-2xl overflow-hidden shadow-lg flex flex-col hover:scale-[1.03] transition-transform duration-300 group">
-    <div className="h-44 w-full overflow-hidden">
-      <img
-        src={project.image}
-        alt={`Aperçu du projet ${project.title}`}
-        className="object-cover w-full h-full group-hover:scale-105 transition-transform duration-500"
-      />
+function Loader() {
+  return (
+    <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black">
+      <div className="animate-spin rounded-full border-t-4 border-blue-500 border-b-4 border-gray-800 h-16 w-16 mb-4"></div>
+      <span
+        className="ml-4 text-xl text-blue-400 font-bold tracking-wide"
+        style={{ fontFamily: "Poppins, sans-serif" }}
+      >
+        Griffy...
+      </span>
     </div>
-    <div className="p-5 flex flex-col flex-1">
-      <h3 className="text-xl font-bold text-blue-400 mb-2">{project.title}</h3>
-      <p className="text-neutral-300 mb-3 flex-1">{project.description}</p>
-      <div className="flex flex-wrap gap-2 mb-4">
-        {project.tech.map((t, i) => (
-          <span
-            key={i}
-            className="bg-blue-800/80 text-xs px-2 py-1 rounded-full flex items-center gap-1"
-          >
-            {t.icon}
-            {t.name}
-          </span>
-        ))}
+  );
+}
+
+function NiveauBar({ niveau }) {
+  return (
+    <div className="flex items-center gap-1">
+      {[1, 2, 3, 4, 5].map((i) =>
+        i <= niveau ? (
+          <FaStar key={i} className="text-blue-400" />
+        ) : (
+          <FaRegCircle key={i} className="text-neutral-600" />
+        )
+      )}
+      <span className="ml-2 text-xs text-neutral-400">
+        {
+          ["Débutant", "Basique", "Intermédiaire", "Bon niveau", "Expert"][
+            niveau - 1
+          ]
+        }
+      </span>
+    </div>
+  );
+}
+
+function CompetenceCard({ comp }) {
+  return (
+    <div
+      className="bg-neutral-900/80 rounded-xl p-6 flex flex-col shadow hover:scale-[1.02] transition-transform duration-300 group"
+      data-aos="fade-up"
+    >
+      <h3 className="text-lg font-semibold text-blue-300 mb-2">{comp.titre}</h3>
+      <p className="text-neutral-300 mb-3">{comp.description}</p>
+      <NiveauBar niveau={comp.niveau} />
+    </div>
+  );
+}
+
+function ProjectCard({ project }) {
+  return (
+    <div className="bg-neutral-900 rounded-2xl overflow-hidden shadow-lg flex flex-col hover:scale-[1.03] transition-transform duration-300 group">
+      <div className="h-44 w-full overflow-hidden">
+        <img
+          src={project.image}
+          alt={`Aperçu du projet ${project.title}`}
+          className="object-cover w-full h-full group-hover:scale-105 transition-transform duration-500"
+        />
       </div>
+      <div className="p-5 flex flex-col flex-1">
+        <h3 className="text-xl font-bold text-blue-400 mb-2">
+          {project.title}
+        </h3>
+        <p className="text-neutral-300 mb-3 flex-1">{project.description}</p>
+        <div className="flex flex-wrap gap-2 mb-4">
+          {project.tech.map((t, i) => (
+            <span
+              key={i}
+              className="bg-blue-800/80 text-xs px-2 py-1 rounded-full flex items-center gap-1"
+            >
+              {t.icon}
+              {t.name}
+            </span>
+          ))}
+        </div>
+        <a
+          href={project.github}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-semibold transition-colors mt-auto"
+        >
+          <FaGithub /> Voir sur GitHub
+        </a>
+      </div>
+    </div>
+  );
+}
+
+// --- INTEREST CARD ---
+function InterestCard({ icon, title, description }) {
+  const [show, setShow] = useState(false);
+  return (
+    <div
+      className="group bg-black/70 rounded-2xl p-8 shadow-lg flex flex-col items-center gap-3 transition-transform duration-300 hover:scale-105 hover:bg-gradient-to-br hover:from-blue-900/70 hover:to-neutral-800/80 relative cursor-pointer"
+      onClick={() => setShow((v) => !v)}
+      title="Clique pour découvrir"
+    >
+      <div className="mb-2">{icon}</div>
+      <div className="font-bold text-lg text-blue-200 group-hover:text-white transition">
+        {title}
+      </div>
+      {show ? (
+        <div className="text-neutral-300 text-sm text-center group-hover:text-blue-100 transition">
+          {description}
+        </div>
+      ) : (
+        <div className="text-xs text-blue-400 italic">
+          Clique pour découvrir
+        </div>
+      )}
+      <div className="absolute inset-0 opacity-0 group-hover:opacity-20 bg-gradient-to-tr from-blue-200 to-transparent rounded-2xl pointer-events-none transition"></div>
+    </div>
+  );
+}
+function SocialSidebar() {
+  return (
+    <div className="fixed left-8 top-1/2 -translate-y-1/2 z-50 hidden md:flex flex-col items-center gap-8">
+      {/* Photo en haut */}
+      <img
+        src="/profile.jpg"
+        alt="Robert Griffaton"
+        className="w-20 h-20 rounded-full border-4 border-blue-500 shadow-xl mb-4 object-cover hover:scale-105 transition-transform duration-300"
+        style={{ boxShadow: "0 4px 24px 0 #0ea5e9" }}
+      />
+      {/* Liens sociaux */}
       <a
-        href={project.github}
+        href="mailto:griffatonr@gmail.com"
+        className="mb-2 bg-black/70 hover:bg-blue-500 p-3 rounded-full shadow-lg transition-colors duration-300"
+        title="Envoyer un email"
+        aria-label="Email"
+      >
+        <FaEnvelope className="text-2xl text-blue-400" />
+      </a>
+      <a
+        href="https://github.com/RobertGriffaton"
         target="_blank"
         rel="noopener noreferrer"
-        className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-semibold transition-colors mt-auto"
+        className="mb-2 bg-black/70 hover:bg-blue-500 p-3 rounded-full shadow-lg transition-colors duration-300"
+        title="GitHub"
+        aria-label="GitHub"
       >
-        <FaGithub /> Voir sur GitHub
+        <FaGithub className="text-2xl text-sky-400" />
       </a>
+      <a
+        href="https://www.linkedin.com/in/robert-griffaton-a85393255/"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="bg-black/70 hover:bg-blue-500 p-3 rounded-full shadow-lg transition-colors duration-300"
+        title="LinkedIn"
+        aria-label="LinkedIn"
+      >
+        <FaLinkedin className="text-2xl text-blue-200" />
+      </a>
+      {/* Ligne décorative */}
+      <div className="w-1 h-20 bg-gradient-to-b from-blue-500 to-transparent mt-6 rounded-full" />
     </div>
-  </div>
-);
-
+  );
+}
 export default function Portfolio() {
   const [scrolled, setScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState("");
   const [menuOpen, setMenuOpen] = useState(false);
   const [loading, setLoading] = useState(true);
 
-  // Fonction pour scroll smooth avec offset pour la navbar
   const handleNavClick = (id) => {
     const element = document.getElementById(id);
     if (element) {
-      const navbarHeight = 80; // ajuste si ta navbar est plus grande
+      const navbarHeight = 80;
       const y =
         element.getBoundingClientRect().top + window.scrollY - navbarHeight;
       window.scrollTo({ top: y, behavior: "smooth" });
@@ -201,6 +397,7 @@ export default function Portfolio() {
       className="relative font-sans scroll-smooth"
       style={{ fontFamily: "Poppins, sans-serif" }}
     >
+      <SocialSidebar />
       <div
         className="fixed inset-0 -z-10 animate-bg-gradient"
         style={{
@@ -215,7 +412,7 @@ export default function Portfolio() {
         <nav
           className={`fixed w-full top-0 z-50 transition-all ${
             scrolled
-              ? "bg-black/90 backdrop-blur border-b border-neutral-800"
+              ? "bg-white/10 backdrop-blur-lg border-b border-white/10"
               : "bg-transparent"
           }`}
         >
@@ -223,7 +420,6 @@ export default function Portfolio() {
             <span className="font-bold text-lg flex items-center gap-2">
               <FaReact className="text-sky-400 text-2xl" /> Robert Griffaton
             </span>
-            {/* Desktop nav */}
             <ul className="hidden md:flex space-x-6 text-sm items-center">
               {navLinks.map(({ id, label }) => (
                 <li key={id}>
@@ -239,7 +435,6 @@ export default function Portfolio() {
                 </li>
               ))}
             </ul>
-            {/* Burger */}
             <div className="md:hidden">
               <button
                 onClick={() => setMenuOpen(!menuOpen)}
@@ -249,7 +444,6 @@ export default function Portfolio() {
               </button>
             </div>
           </div>
-          {/* Mobile nav */}
           {menuOpen && (
             <div className="md:hidden px-6 pb-4">
               <ul className="space-y-2 text-sm">
@@ -272,22 +466,14 @@ export default function Portfolio() {
             </div>
           )}
         </nav>
-        <div
-          className="fixed inset-0 -z-10"
-          style={{
-            background:
-              "linear-gradient(120deg, #0f172a 0%, #22223b 50%, #1a202c 100%)",
-            animation: "gradientMove 15s ease-in-out infinite alternate",
-          }}
-        />
 
-        {/* Hero section */}
+        {/* Hero */}
         <header
           className="h-[100vh] flex flex-col justify-center items-center text-center px-4"
           data-aos="fade-down"
         >
           <img
-            src="/PortfolioRG/profile.jpg"
+            src="/profile.jpg"
             alt="Portrait de Robert Griffaton"
             className="w-32 h-32 rounded-full border-4 border-blue-500 mb-4 shadow-lg"
           />
@@ -308,7 +494,7 @@ export default function Portfolio() {
             </li>
             <li>
               <a
-                href="https://github.com/griffatonr"
+                href="https://github.com/RobertGriffaton"
                 target="_blank"
                 className="hover:text-blue-400"
                 title="GitHub"
@@ -318,7 +504,7 @@ export default function Portfolio() {
             </li>
             <li>
               <a
-                href="https://www.linkedin.com/in/robertgriffaton"
+                href="https://www.linkedin.com/in/robert-griffaton-a85393255/"
                 target="_blank"
                 className="hover:text-blue-400"
                 title="LinkedIn"
@@ -339,15 +525,16 @@ export default function Portfolio() {
             </a>
           </div>
         </header>
+
+        {/* À propos */}
         <section
           id="about"
           className="relative bg-gradient-to-br from-black via-neutral-900 to-neutral-950 rounded-3xl max-w-5xl mx-auto flex flex-col md:flex-row items-center gap-8 p-8 mb-14 shadow-2xl"
           data-aos="fade-up"
         >
-          {/* Photo à gauche */}
           <div className="shrink-0 flex flex-col items-center md:items-start">
             <img
-              src="/profile.jpg"
+              src="/moimicro.jpg"
               alt="Robert Griffaton"
               className="w-40 h-40 md:w-52 md:h-52 rounded-full object-cover border-4 border-blue-500 shadow-lg mb-4"
             />
@@ -355,7 +542,6 @@ export default function Portfolio() {
               Robert Griffaton
             </span>
           </div>
-          {/* Texte à propos */}
           <div className="flex-1 text-left">
             <h2 className="text-3xl font-bold mb-4 text-blue-400">
               À propos de moi
@@ -377,6 +563,8 @@ export default function Portfolio() {
             </p>
           </div>
         </section>
+
+        {/* Compétences */}
         <section
           id="skills"
           className="max-w-6xl mx-auto px-4 mb-14"
@@ -471,78 +659,83 @@ export default function Portfolio() {
                   <FaRegFileAlt />
                   Microsoft 365
                 </li>
-                {/* Ajoute ici d'autres outils si besoin */}
               </ul>
             </div>
           </div>
         </section>
 
-        {/* Bloc 2 : Parcours scolaire & Objectifs */}
-        {/* Parcours scolaire */}
+        {/* Bloc : Parcours scolaire & Objectifs */}
         <section
-          id="parcours-objectifs"
+          id="parcours"
           className="max-w-6xl mx-auto my-12 px-4 py-8 bg-neutral-900/80 rounded-3xl shadow-xl"
           data-aos="fade-up"
         >
           <h2 className="text-2xl md:text-3xl font-bold text-blue-400 mb-10 text-center tracking-tight">
             Mon Parcours & Mes Objectifs
           </h2>
-
-          {/* Timeline horizontale sur desktop, verticale sur mobile */}
           <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-8 relative">
-            {/* Etape collège */}
+            {/* Collège */}
             <div className="flex-1 flex flex-col items-center relative">
               <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-blue-900 to-blue-600 shadow-lg flex items-center justify-center mb-4">
                 <FaSchool className="text-green-300 text-3xl" />
               </div>
               <div className="bg-black/70 rounded-xl p-5 shadow-md w-full text-center">
-                <div className="font-bold text-blue-200 text-lg mb-1">
+                <div className="font-extrabold text-blue-100 text-xl mb-1">
+                  Brevet
+                </div>
+                <div className="text-blue-300 font-semibold text-sm mb-1">
+                  Mention Très Bien
+                </div>
+                <div className="text-neutral-200 text-sm mb-1">
                   Collège Victor Hugo
                 </div>
-                <div className="text-sm text-blue-400 mb-2">2016 – 2020</div>
-                <div className="text-neutral-300 text-sm mb-1">
-                  Brevet mention Très Bien
+                <div className="text-xs text-blue-400">
+                  2016 – 2020, Sarcelles
                 </div>
-                <div className="text-xs text-neutral-400">Sarcelles</div>
               </div>
               {/* Ligne de liaison */}
               <div className="hidden md:block absolute right-[-16px] top-[48px] w-8 h-2 bg-gradient-to-r from-blue-500 to-yellow-400 rounded-full z-0"></div>
             </div>
-            {/* Etape lycée */}
+            {/* Lycée */}
             <div className="flex-1 flex flex-col items-center relative">
               <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-yellow-700 to-yellow-400 shadow-lg flex items-center justify-center mb-4">
                 <FaGraduationCap className="text-yellow-100 text-3xl" />
               </div>
               <div className="bg-black/70 rounded-xl p-5 shadow-md w-full text-center">
-                <div className="font-bold text-yellow-300 text-lg mb-1">
+                <div className="font-extrabold text-yellow-100 text-xl mb-1">
+                  Baccalauréat Général
+                </div>
+                <div className="text-yellow-300 font-semibold text-sm mb-1">
+                  Spécialités Maths, Physique-Chimie, Maths expertes
+                </div>
+                <div className="text-neutral-200 text-sm mb-1">
                   Lycée Jean Jacques Rousseau
                 </div>
-                <div className="text-sm text-yellow-400 mb-2">2020 – 2023</div>
-                <div className="text-neutral-300 text-sm mb-1">
-                  Bac Général spé Maths/Physique-Chimie, Maths expertes
+                <div className="text-xs text-yellow-400">
+                  2020 – 2023, Sarcelles
                 </div>
-                <div className="text-xs text-neutral-400">Sarcelles</div>
               </div>
               {/* Ligne de liaison */}
               <div className="hidden md:block absolute right-[-16px] top-[48px] w-8 h-2 bg-gradient-to-r from-yellow-400 to-sky-400 rounded-full z-0"></div>
             </div>
-            {/* Etape BUT */}
+            {/* BUT */}
             <div className="flex-1 flex flex-col items-center relative">
               <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-blue-400 to-sky-600 shadow-lg flex items-center justify-center mb-4">
                 <FaReact className="text-white text-3xl" />
               </div>
               <div className="bg-black/70 rounded-xl p-5 shadow-md w-full text-center">
-                <div className="font-bold text-sky-400 text-lg mb-1">
+                <div className="font-extrabold text-sky-200 text-xl mb-1">
                   BUT Informatique
                 </div>
-                <div className="text-sm text-sky-200 mb-2">
-                  2023 – 2026 (en cours)
+                <div className="text-sky-400 font-semibold text-sm mb-1">
+                  Réalisation d'applications : conception, développement,
+                  validation{" "}
                 </div>
-                <div className="text-neutral-300 text-sm mb-1">
-                  IUT Villetaneuse
+                <div className="text-neutral-200 text-sm mb-1">
+                  IUT Villetaneuse - Sorbonne Paris Nord
                 </div>
-                <div className="text-xs text-neutral-400">
-                  Alternance prévue en 3ème année
+                <div className="text-xs text-sky-400">
+                  2023 – 2026, Villetaneuse
                 </div>
               </div>
               {/* Ligne de liaison */}
@@ -554,65 +747,114 @@ export default function Portfolio() {
                 <FaArrowRight className="text-white text-3xl" />
               </div>
               <div className="bg-black/60 rounded-xl p-5 shadow-md w-full text-center">
-                <div className="font-bold text-emerald-400 text-lg mb-1">
+                <div className="font-extrabold text-emerald-400 text-xl mb-1">
                   Objectif
                 </div>
-                <div className="text-neutral-200 text-sm mb-2">
-                  Poursuivre en école d’ingénieur (après le BUT) pour me
-                  spécialiser en développement logiciel / fullstack.
-                  <br />
-                  <span className="text-xs text-blue-300 block mt-1">
-                    Alternance recherchée dès la 3ème année de BUT.
-                  </span>
+                <div className="text-blue-200 font-semibold text-sm mb-1">
+                  École d’Ingénieur (Dév logiciel, alternance dès la 3ème année)
                 </div>
-                <div className="text-xs text-neutral-400">
-                  Ingénierie, projets innovants, expertise technique.
+                <div className="text-neutral-200 text-sm mb-1">
+                  Spécialisation en développement fullstack, expertise
+                  technique, projets innovants
                 </div>
+                <div className="text-xs text-blue-400">À partir de 2026</div>
               </div>
             </div>
           </div>
         </section>
 
+        {/* Centres d’intérêts */}
+        <section
+          id="interets"
+          className="max-w-4xl mx-auto mt-12 px-4 py-8 bg-neutral-900/80 rounded-3xl shadow-xl"
+          data-aos="fade-up"
+        >
+          <h2 className="text-2xl md:text-3xl font-bold text-blue-400 mb-10 text-center tracking-tight">
+            Centres d’intérêts
+          </h2>
+          <div className="flex flex-col md:flex-row gap-8 justify-center items-center">
+            {interests.map((interest, i) => (
+              <InterestCard key={i} {...interest} />
+            ))}
+          </div>
+        </section>
+
+        {/* Compétences BUT */}
+        <section
+          id="but-competences"
+          className="max-w-4xl mx-auto my-16"
+          data-aos="fade-up"
+        >
+          <h2 className="text-2xl font-bold text-blue-400 mb-8 text-center">
+            Mes compétences du BUT Informatique
+          </h2>
+          <div className="grid md:grid-cols-2 gap-7">
+            {butCompetences.map((comp, i) => (
+              <CompetenceCard comp={comp} key={i} />
+            ))}
+          </div>
+        </section>
+
+        {/* Experience Pro */}
         <main className="max-w-6xl mx-auto px-4 md:px-8 py-12 md:py-16 flex flex-col gap-12">
           <section
             id="experience"
             data-aos="fade-up"
-            className="bg-neutral-900/80 rounded-2xl p-8 shadow max-w-4xl mx-auto my-12"
+            className="max-w-5xl mx-auto my-20 flex flex-col md:flex-row shadow-2xl rounded-3xl overflow-hidden bg-gradient-to-tr from-neutral-950 via-neutral-900 to-neutral-950"
+            style={{ minHeight: "420px" }}
           >
-            <h2 className="text-2xl font-bold text-blue-400 mb-6 flex items-center gap-2">
-              <FaNodeJs className="text-green-400" /> Expérience professionnelle
-            </h2>
+            {/* IMAGE AVEC BULLE DATE */}
+            <div className="relative md:w-[40%] w-full">
+              <img
+                src="/public/Stage.jpg"
+                alt="Stage Ramsay Santé"
+                className="object-cover w-full h-full md:min-h-[420px] md:max-h-[540px] min-h-[220px] md:rounded-l-3xl"
+                style={{ borderTopRightRadius: 0, borderBottomRightRadius: 0 }}
+              />
+              {/* Bulle date/lieu */}
+              <div className="absolute top-4 left-4 bg-blue-700/80 text-white px-4 py-2 rounded-full text-xs shadow-xl font-semibold flex items-center gap-2 backdrop-blur-md">
+                <FaNodeJs className="text-green-400" /> Stage 2025 — Ramsay
+                Santé
+              </div>
+            </div>
 
-            <div className="space-y-6 text-neutral-200 text-lg">
-              <h3 className="font-semibold text-blue-300 mb-2">
-                Découverte du monde professionnel
-              </h3>
-              <p>
-                Ce stage chez{" "}
-                <span className="font-semibold text-blue-200">
-                  Ramsay Santé
-                </span>{" "}
-                était ma première vraie expérience en entreprise. J’ai découvert
-                la réalité du travail&nbsp;: rythme, autonomie, organisation
-                d’équipe et diversité des profils. L’ambiance était détendue et
-                bienveillante, ce qui m’a permis de m’intégrer facilement malgré
-                la nouveauté. On m’a rapidement fait confiance&nbsp;: j’ai eu
-                des responsabilités comme organiser des réunions, gérer des
-                données, recueillir les besoins, et surtout développer un
-                intranet pour l’entreprise, qui était mon projet principal.
-              </p>{" "}
-              <div>
-                <h3 className="font-semibold text-blue-300 mb-2">
-                  Travail en équipe et découverte de moi-même
-                </h3>
-                <p>
-                  J’ai appris à m’intégrer, à prendre la parole en réunion et à
-                  collaborer au quotidien. J’ai pu aider des collègues sur
-                  certaines tâches, tout comme ils m’ont soutenu. Ce climat
-                  d’entraide m’a montré l’importance de l’esprit d’équipe et m’a
-                  donné confiance en mes capacités à évoluer dans un cadre
-                  professionnel.
-                </p>
+            {/* TEXTE À DROITE */}
+            <div className="flex-1 flex flex-col justify-center p-8 md:p-12 bg-gradient-to-br from-neutral-900/90 to-black/70">
+              <h2 className="text-2xl font-bold text-blue-400 mb-5 flex items-center gap-2">
+                <FaNodeJs className="text-green-400" /> Expérience
+                professionnelle
+              </h2>
+              <div className="space-y-7 text-neutral-200 text-[1.1rem]">
+                <div>
+                  <h3 className="font-semibold text-blue-300 text-lg mb-2 flex items-center gap-2">
+                    <FaArrowRight className="text-sky-400" /> Découverte du
+                    monde professionnel
+                  </h3>
+                  <p className="leading-relaxed text-neutral-300">
+                    Mon stage chez{" "}
+                    <span className="font-semibold text-blue-200">
+                      Ramsay Santé
+                    </span>{" "}
+                    a été ma première vraie expérience en entreprise. J’ai
+                    découvert la réalité du travail : rythme, autonomie, gestion
+                    de projets et diversité des profils. L’ambiance était
+                    détendue et bienveillante, ce qui m’a permis de m’intégrer
+                    rapidement.
+                  </p>
+                </div>
+                <div className="border-t border-neutral-700 pt-5">
+                  <h3 className="font-semibold text-blue-300 text-lg mb-2 flex items-center gap-2">
+                    <FaArrowRight className="text-sky-400" /> Travail en équipe
+                    & responsabilités
+                  </h3>
+                  <p className="leading-relaxed text-neutral-300">
+                    J’ai été responsabilisé dès le début : organisation de
+                    réunions, recueil de besoins, gestion de données et
+                    développement d’un intranet. J’ai appris à prendre la parole
+                    en réunion, à collaborer avec des collègues bienveillants, à
+                    aider et à me faire aider dans un vrai esprit d’équipe.
+                  </p>
+                </div>
               </div>
             </div>
           </section>
@@ -648,7 +890,6 @@ export default function Portfolio() {
             </p>
 
             <div className="flex flex-col md:flex-row gap-6 justify-center items-center">
-              {/* Email (avec copie au clic) */}
               <button
                 onClick={() => {
                   navigator.clipboard.writeText("griffatonr@gmail.com");
@@ -662,10 +903,8 @@ export default function Portfolio() {
                 <FaEnvelope className="text-2xl" />
                 griffatonr@gmail.com
               </button>
-
-              {/* GitHub */}
               <a
-                href="https://github.com/griffatonr"
+                href="https://github.com/RobertGriffaton"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-3 px-7 py-4 rounded-full bg-gradient-to-r from-neutral-800 via-gray-700 to-gray-600 hover:from-gray-800 hover:to-blue-700 focus:ring-2 focus:ring-blue-400 text-white font-semibold text-lg shadow-xl transition-all duration-300 active:scale-95"
@@ -675,10 +914,8 @@ export default function Portfolio() {
                 <FaGithub className="text-2xl text-sky-400" />
                 GitHub
               </a>
-
-              {/* LinkedIn */}
               <a
-                href="https://www.linkedin.com/in/robertgriffaton"
+                href="https://www.linkedin.com/in/robert-griffaton-a85393255/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-3 px-7 py-4 rounded-full bg-gradient-to-r from-blue-700 to-sky-500 hover:from-sky-700 hover:to-blue-800 focus:ring-2 focus:ring-blue-400 text-white font-semibold text-lg shadow-xl transition-all duration-300 active:scale-95"
@@ -697,7 +934,6 @@ export default function Portfolio() {
             </div>
           </section>
         </main>
-
         <footer className="bg-neutral-900 text-center py-6 text-sm text-neutral-500 mt-8 rounded-t-xl shadow">
           © {new Date().getFullYear()} Robert Griffaton — Portfolio personnel
         </footer>
