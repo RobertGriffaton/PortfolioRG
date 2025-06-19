@@ -28,3 +28,68 @@
 .animate-fadein {
   animation: fadein 1.2s cubic-bezier(0.4, 0, 0.2, 1) 0.3s 1 backwards;
 }
+@keyframes loader-progress {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+.animate-loader-progress {
+  animation: loader-progress 1.5s infinite linear;
+  width: 60%;
+}
+@keyframes text-bounce {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  30% {
+    transform: translateY(-10px);
+  }
+  60% {
+    transform: translateY(-3px);
+  }
+}
+.animate-text-bounce {
+  animation: text-bounce 1.4s infinite cubic-bezier(0.65, 0.05, 0.36, 1);
+}
+@keyframes text-fadein {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.animate-text-fadein {
+  animation: text-fadein 1s ease-out forwards;
+  animation-delay: 0.5s;
+}
+@keyframes text-fadein-delay {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes text-bounce {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  30% {
+    transform: translateY(-13px);
+  }
+  60% {
+    transform: translateY(-5px);
+  }
+}
+.animate-text-bounce {
+  display: inline-block;
+  animation: text-bounce 1.2s infinite cubic-bezier(0.65, 0.05, 0.36, 1);
+}

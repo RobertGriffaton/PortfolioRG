@@ -13,6 +13,7 @@ import {
   FaGraduationCap,
   FaHtml5,
   FaJava,
+  FaLaptopCode,
   FaLinkedin,
   FaMusic,
   FaNodeJs,
@@ -26,7 +27,6 @@ import {
 import {
   SiExpress,
   SiFigma,
-  SiFirebase,
   SiJavascript,
   SiMongodb,
   SiMysql,
@@ -38,6 +38,7 @@ import {
   SiTailwindcss,
   SiTypescript,
   SiVscodium,
+  SiVuedotjs,
 } from "react-icons/si";
 
 const navLinks = [
@@ -103,59 +104,84 @@ const butCompetences = [
 
 const projects = [
   {
-    title: "Intranet MOA – Ramsay Santé",
-    image: "/images/intranet.png",
+    title: "ATM Chat",
+    image: "./atmchat_projet.png",
     description:
-      "Développement d’un intranet collaboratif lors de mon stage au service MOA (Cergy) : recueil de besoins, conception, gestion des accès, communication interne et autonomie sur le projet.",
+      "Application de chat avec annotation réalisée en équipe lors de la SAE S3. Fullstack PHP, WebSockets, MySQL, front moderne et gestion utilisateurs.",
     tech: [
-      { icon: <FaReact className="text-sky-400" />, name: "React" },
+      { icon: <SiPhp className="text-purple-300" />, name: "PHP" },
+      { icon: <FaHtml5 className="text-orange-500" />, name: "HTML" },
+      { icon: <FaCss3Alt className="text-blue-400" />, name: "CSS" },
       {
         icon: <SiJavascript className="text-yellow-400" />,
         name: "JavaScript",
       },
-      { icon: <FaNodeJs className="text-green-500" />, name: "Node.js" },
+      { icon: <SiMysql className="text-blue-500" />, name: "MySQL" },
+      {
+        icon: <SiSocketdotio className="text-gray-300" />,
+        name: "WebSocket/Ratchet",
+      },
     ],
-    github: "https://github.com/RobertGriffaton",
+    github: "https://github.com/Guen0x/SAE_AppChatAnnotation  ", // Mets le bon lien si besoin
   },
   {
-    title: "Application de Chat Annotée",
-    image: "/images/chat-app.png",
+    title: "Calculatrice Arithmétique",
+    image: "./calculatrice_projet.png",
     description:
-      "Projet d’équipe (BUT) : application de messagerie avec fonctionnalités avancées (annotation, gestion d’utilisateurs, temps réel avec sockets).",
-    tech: [
-      { icon: <FaReact className="text-sky-400" />, name: "React" },
-      { icon: <SiSocketdotio className="text-gray-300" />, name: "Socket.io" },
-      { icon: <FaNodeJs className="text-green-500" />, name: "Node.js" },
-    ],
-    github: "https://github.com/RobertGriffaton",
-  },
-  {
-    title: "Calculatrice Java & POO",
-    image: "/images/java-calc.png",
-    description:
-      "Application de calculatrice arithmétique réalisée en Java : modularité, interface graphique, structuration orientée objet et robustesse du code.",
+      "Calculatrice graphique en Java développée pour la SAE S2 : gestion d’opérations de base, structure POO et interface utilisateur ergonomique.",
     tech: [{ icon: <FaJava className="text-red-400" />, name: "Java" }],
+    github: "https://github.com/RobertGriffaton/CalculatriceArithmetique  ",
+  },
+  {
+    title: "Santa Claus – Parcours du Père Noël",
+    image: "./santaclaus_projet.png",
+    description:
+      "Optimisation d’itinéraire en Python : algorithme pour calculer les meilleurs trajets du Père Noël, découverte des structures de données. Développé en binôme lors de la SAE S1.",
+    tech: [{ icon: <SiPython className="text-blue-400" />, name: "Python" }],
     github: "https://github.com/RobertGriffaton",
   },
   {
-    title: "Gestion d’étudiants Firebase",
-    image: "/images/gestion-etudiants.png",
+    title: "Puissance 4",
+    image: "./puissance4_projet.png",
     description:
-      "Dashboard pour gérer une base d’étudiants : CRUD, authentification, sauvegarde cloud sur Firebase, design épuré.",
+      "Réalisation d’un Puissance 4 digitalisé : logique de jeu, interface, personnalisation, et challenge algorithmique.",
     tech: [
-      { icon: <FaReact className="text-sky-400" />, name: "React" },
-      { icon: <SiFirebase className="text-yellow-500" />, name: "Firebase" },
+      {
+        icon: <SiJavascript className="text-yellow-400" />,
+        name: "JavaScript",
+      },
+      { icon: <SiVuedotjs className="text-green-400" />, name: "Vue.js" },
     ],
     github: "https://github.com/RobertGriffaton",
   },
   {
-    title: "Simulation réseau Python",
-    image: "/images/simulation-reseau.png",
+    title: "Memory Card - En Cours",
+    image: "./memorycard_projet.png",
     description:
-      "Simulation de communication entre machines pour comprendre les protocoles réseau et les bases de la cybersécurité.",
+      "Jeu de memory en ligne sur le thème du football. Développement front-end, animations, et UX ludique.",
     tech: [
-      { icon: <SiPython className="text-blue-400" />, name: "Python" },
-      { icon: <SiSocketdotio className="text-gray-300" />, name: "Sockets" },
+      { icon: <FaHtml5 className="text-orange-500" />, name: "HTML" },
+      { icon: <FaCss3Alt className="text-blue-400" />, name: "CSS" },
+      {
+        icon: <SiJavascript className="text-yellow-400" />,
+        name: "JavaScript",
+      },
+    ],
+    github: "https://github.com/RobertGriffaton",
+  },
+  {
+    title: "Top Auto – En Cours",
+    image: "./topauto_projet.png",
+    description:
+      "Conception d’un site vitrine pour un garage : présentation de l’activité, services, véhicules en stock. Projet en cours pour un proche.",
+    tech: [
+      { icon: <FaHtml5 className="text-orange-500" />, name: "HTML" },
+      { icon: <FaCss3Alt className="text-blue-400" />, name: "CSS" },
+      {
+        icon: <SiJavascript className="text-yellow-400" />,
+        name: "JavaScript",
+      },
+      { icon: <FaReact className="text-sky-400" />, name: "React" },
     ],
     github: "https://github.com/RobertGriffaton",
   },
@@ -190,15 +216,26 @@ const interests = [
 ];
 
 function Loader() {
+  const text = "Robert Griffaton";
   return (
-    <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black">
-      <div className="animate-spin rounded-full border-t-4 border-blue-500 border-b-4 border-gray-800 h-16 w-16 mb-4"></div>
+    <div className="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-black">
       <span
-        className="ml-4 text-xl text-blue-400 font-bold tracking-wide"
+        className="mb-7 text-3xl text-blue-400 font-bold tracking-wide"
         style={{ fontFamily: "Poppins, sans-serif" }}
       >
-        Griffy...
+        {text.split("").map((char, i) => (
+          <span
+            key={i}
+            className="animate-text-bounce"
+            style={{ animationDelay: `${i * 0.07}s` }}
+          >
+            {char === " " ? "\u00A0" : char}
+          </span>
+        ))}
       </span>
+      <div className="w-36 h-3 bg-neutral-700 rounded-full overflow-hidden">
+        <div className="h-full bg-gradient-to-r from-blue-500 via-sky-400 to-blue-700 animate-loader-progress"></div>
+      </div>
     </div>
   );
 }
@@ -307,7 +344,7 @@ function SocialSidebar() {
     <div className="fixed left-8 top-1/2 -translate-y-1/2 z-50 hidden md:flex flex-col items-center gap-8">
       {/* Photo en haut */}
       <img
-        src="/profile.jpg"
+        src="./jsppp.jpg"
         alt="Robert Griffaton"
         className="w-20 h-20 rounded-full border-4 border-blue-500 shadow-xl mb-4 object-cover hover:scale-105 transition-transform duration-300"
         style={{ boxShadow: "0 4px 24px 0 #0ea5e9" }}
@@ -346,6 +383,7 @@ function SocialSidebar() {
     </div>
   );
 }
+
 export default function Portfolio() {
   const [scrolled, setScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState("");
@@ -365,7 +403,7 @@ export default function Portfolio() {
 
   useEffect(() => {
     AOS.init({ duration: 800, once: true });
-    setTimeout(() => setLoading(false), 1500);
+    setTimeout(() => setLoading(false), 1750);
 
     const handleScroll = () => {
       setScrolled(window.scrollY > 10);
@@ -416,8 +454,8 @@ export default function Portfolio() {
               : "bg-transparent"
           }`}
         >
-          <div className="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
-            <span className="font-bold text-lg flex items-center gap-2">
+          <div className="max-w-6xl mx-auto px-0 py-4 flex justify-between items-center">
+            <span className="font-bold text-lg flex items-center gap-2 ">
               <FaReact className="text-sky-400 text-2xl" /> Robert Griffaton
             </span>
             <ul className="hidden md:flex space-x-6 text-sm items-center">
@@ -473,7 +511,7 @@ export default function Portfolio() {
           data-aos="fade-down"
         >
           <img
-            src="/profile.jpg"
+            src="./profile.jpg"
             alt="Portrait de Robert Griffaton"
             className="w-32 h-32 rounded-full border-4 border-blue-500 mb-4 shadow-lg"
           />
@@ -516,7 +554,7 @@ export default function Portfolio() {
 
           <div className="mt-6 flex justify-center">
             <a
-              href="/CV_Robert_Griffaton.pdf"
+              href="./CV RobertGriffaton.pdf"
               download
               className="inline-flex items-center gap-3 px-8 py-3 rounded-full bg-blue-600 hover:bg-blue-700 text-white font-bold text-lg shadow transition-all duration-300"
             >
@@ -534,7 +572,7 @@ export default function Portfolio() {
         >
           <div className="shrink-0 flex flex-col items-center md:items-start">
             <img
-              src="/moimicro.jpg"
+              src="./moimicro.jpg"
               alt="Robert Griffaton"
               className="w-40 h-40 md:w-52 md:h-52 rounded-full object-cover border-4 border-blue-500 shadow-lg mb-4"
             />
@@ -721,7 +759,7 @@ export default function Portfolio() {
             {/* BUT */}
             <div className="flex-1 flex flex-col items-center relative">
               <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-blue-400 to-sky-600 shadow-lg flex items-center justify-center mb-4">
-                <FaReact className="text-white text-3xl" />
+                <FaLaptopCode className="text-white text-3xl" />
               </div>
               <div className="bg-black/70 rounded-xl p-5 shadow-md w-full text-center">
                 <div className="font-extrabold text-sky-200 text-xl mb-1">
@@ -751,12 +789,10 @@ export default function Portfolio() {
                   Objectif
                 </div>
                 <div className="text-blue-200 font-semibold text-sm mb-1">
-                  École d’Ingénieur (Dév logiciel, alternance dès la 3ème année)
+                  École d’Ingénieur en Informatique en me spécialisant dans un
+                  domaine comme l'IA, ou le développement logiciel.
                 </div>
-                <div className="text-neutral-200 text-sm mb-1">
-                  Spécialisation en développement fullstack, expertise
-                  technique, projets innovants
-                </div>
+                <div className="text-neutral-200 text-sm mb-1"></div>
                 <div className="text-xs text-blue-400">À partir de 2026</div>
               </div>
             </div>
@@ -786,7 +822,7 @@ export default function Portfolio() {
           data-aos="fade-up"
         >
           <h2 className="text-2xl font-bold text-blue-400 mb-8 text-center">
-            Mes compétences du BUT Informatique
+            Compétences acquises lors de mon BUT Informatique
           </h2>
           <div className="grid md:grid-cols-2 gap-7">
             {butCompetences.map((comp, i) => (
@@ -806,7 +842,7 @@ export default function Portfolio() {
             {/* IMAGE AVEC BULLE DATE */}
             <div className="relative md:w-[40%] w-full">
               <img
-                src="/public/Stage.jpg"
+                src="./Stage.jpg"
                 alt="Stage Ramsay Santé"
                 className="object-cover w-full h-full md:min-h-[420px] md:max-h-[540px] min-h-[220px] md:rounded-l-3xl"
                 style={{ borderTopRightRadius: 0, borderBottomRightRadius: 0 }}
@@ -935,7 +971,7 @@ export default function Portfolio() {
           </section>
         </main>
         <footer className="bg-neutral-900 text-center py-6 text-sm text-neutral-500 mt-8 rounded-t-xl shadow">
-          © {new Date().getFullYear()} Robert Griffaton — Portfolio personnel
+          © {new Date().getFullYear()} Portfolio - Robert Griffaton
         </footer>
       </div>
     </div>
