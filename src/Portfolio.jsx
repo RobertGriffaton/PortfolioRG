@@ -141,7 +141,7 @@ function ButCompetenceCard({ titre, description, exemple }) {
 const projects = [
   {
     title: "ATM Chat",
-    image: "/atmchat_projet.png",
+    image: "./atmchat_projet.png",
     description:
       "Application de chat avec annotation réalisée en équipe lors de la SAE S3. Fullstack PHP, WebSockets, MySQL, front moderne et gestion utilisateurs.",
     tech: [
@@ -172,7 +172,7 @@ const projects = [
   },
   {
     title: "Calculatrice Arithmétique",
-    image: "/calculatrice_projet.png",
+    image: "./calculatrice_projet.png",
     description:
       "Calculatrice graphique en Java développée pour la SAE S2 : gestion d’opérations de base, structure POO et interface utilisateur ergonomique.",
     tech: [{ icon: <FaJava className="text-red-400" />, name: "Java" }],
@@ -190,7 +190,7 @@ const projects = [
   },
   {
     title: "Santa Claus – Parcours du Père Noël",
-    image: "/santaclaus_projet.png",
+    image: "./santaclaus_projet.png",
     description:
       "Optimisation d’itinéraire en Python : algorithme pour calculer les meilleurs trajets du Père Noël, découverte des structures de données. Développé en binôme lors de la SAE S1.",
     tech: [{ icon: <SiPython className="text-blue-400" />, name: "Python" }],
@@ -208,7 +208,7 @@ const projects = [
   },
   {
     title: "Puissance 4",
-    image: "/puissance4_projet.png",
+    image: "./puissance4_projet.png",
     description:
       "Réalisation d’un Puissance 4 digitalisé : logique de jeu, interface, personnalisation, et challenge algorithmique.",
     tech: [
@@ -263,7 +263,7 @@ const projects = [
   },
   {
     title: "Top Auto – En Cours",
-    image: "/topauto_projet.png",
+    image: "./topauto_projet.png",
     description:
       "Conception d’un site vitrine pour un garage : présentation de l’activité, services, véhicules en stock. Projet en cours pour un proche.",
     tech: [
