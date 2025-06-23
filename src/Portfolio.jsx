@@ -2,10 +2,14 @@ import "@fontsource/poppins";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import { useEffect, useState } from "react";
+import ProjectsSection from "./ProjectsSection";
+
 import {
   FaArrowRight,
   FaBars,
   FaChessKnight,
+  FaChevronDown,
+  FaChevronUp,
   FaCss3Alt,
   FaEnvelope,
   FaGitAlt,
@@ -68,50 +72,80 @@ const butCompetences = [
   {
     titre: "Réaliser un développement d'application",
     description:
-      "Développer des applications web et logicielles adaptées aux besoins utilisateurs.",
-    niveau: 4,
+      "Développer des applications web et logicielles adaptées aux besoins des utilisateurs.",
+    exemple:
+      "Projet ATM Chat : création d'une application de messagerie collaborative fullstack (PHP/JS/MySQL/WebSockets) lors des SAE S3 et S4.",
   },
   {
     titre: "Optimiser des applications informatiques",
     description:
-      "Analyser et améliorer les performances et la qualité des applications.",
-    niveau: 4,
+      "Analyser et améliorer la performance, la sécurité et la qualité des applications.",
+    exemple:
+      "Sur le projet Calculatrice Java, j’ai retravaillé l’architecture pour la rendre plus modulaire et plus rapide lors du calcul de grandes opérations.",
   },
   {
     titre: "Administrer des systèmes informatiques communicants complexes",
     description:
-      "Configurer, sécuriser et maintenir des systèmes réseaux avancés.",
-    niveau: 2,
+      "Configurer, sécuriser et maintenir des systèmes réseaux ou des bases de données complexes.",
+    exemple:
+      "Réalisation d’une simulation réseau en Python, pour comprendre le fonctionnement des protocoles et la sécurité des communications.",
   },
   {
     titre: "Gérer des données de l'information",
-    description: "Modéliser, organiser et exploiter efficacement les données.",
-    niveau: 3,
+    description:
+      "Modéliser, organiser, exploiter et sécuriser des données avec différents outils et SGBD.",
+    exemple:
+      "Création d’un dashboard de gestion d’étudiants, stockage cloud sur Firebase avec CRUD, authentification et accès multi-utilisateurs.",
   },
   {
     titre: "Conduire un projet",
     description:
-      "Planifier, organiser et piloter des projets informatiques en équipe.",
-    niveau: 4,
+      "Planifier, organiser et piloter des projets informatiques, seul ou en équipe.",
+    exemple:
+      "Stage Ramsay Santé : autonomie totale sur la gestion et le développement d’un intranet, du recueil des besoins à la présentation finale.",
   },
   {
     titre: "Travailler dans une équipe informatique",
     description:
       "Collaborer efficacement, communiquer et s’intégrer dans une équipe de développement.",
-    niveau: 5,
+    exemple:
+      "Sur le projet ATM Chat, travail d’équipe (5 personnes) : gestion de Git, organisation de réunions, aide et entraide régulière.",
   },
 ];
+
+// Composant individuel de compétence
+function ButCompetenceCard({ titre, description, exemple }) {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <div className="bg-neutral-900/80 rounded-xl p-6 shadow flex flex-col gap-3 hover:scale-[1.02] transition-transform duration-300 group">
+      <h3 className="text-lg font-bold text-blue-300">{titre}</h3>
+      <p className="text-neutral-300">{description}</p>
+      <button
+        onClick={() => setOpen((v) => !v)}
+        className="mt-2 inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-blue-600 to-sky-400 hover:from-sky-700 hover:to-blue-500 text-white font-semibold text-sm shadow-lg transition-all duration-300 focus:outline-none"
+        aria-expanded={open}
+      >
+        {open ? <FaChevronUp /> : <FaChevronDown />}
+        Voir un exemple
+      </button>
+      {open && (
+        <div className="mt-2 bg-blue-950/70 rounded-lg p-4 text-blue-100 text-sm border-l-4 border-blue-400 animate-fade-in">
+          {exemple}
+        </div>
+      )}
+    </div>
+  );
+}
 
 const projects = [
   {
     title: "ATM Chat",
-    image: "./atmchat_projet.png",
+    image: "/atmchat_projet.png",
     description:
       "Application de chat avec annotation réalisée en équipe lors de la SAE S3. Fullstack PHP, WebSockets, MySQL, front moderne et gestion utilisateurs.",
     tech: [
       { icon: <SiPhp className="text-purple-300" />, name: "PHP" },
-      { icon: <FaHtml5 className="text-orange-500" />, name: "HTML" },
-      { icon: <FaCss3Alt className="text-blue-400" />, name: "CSS" },
       {
         icon: <SiJavascript className="text-yellow-400" />,
         name: "JavaScript",
@@ -122,29 +156,61 @@ const projects = [
         name: "WebSocket/Ratchet",
       },
     ],
-    github: "https://github.com/Guen0x/SAE_AppChatAnnotation  ", // Mets le bon lien si besoin
+    github: "https://github.com/Guen0x/SAE_AppChatAnnotation",
+    details:
+      "Projet d’équipe sur un chat moderne : j’ai appris à gérer l’authentification, la communication en temps réel, et à travailler en fullstack. Gros challenge sur la gestion des messages annotés.",
+    positifs: [
+      "Superbe montée en compétence WebSocket",
+      "Travail d’équipe efficace et bonne ambiance",
+      "Front complet et personnalisable",
+    ],
+    negatifs: [
+      "Planning un peu serré",
+      "Documentation du code à renforcer pour l’avenir",
+    ],
+    perso: "Premier vrai projet complet de A à Z, grosse fierté !",
   },
   {
     title: "Calculatrice Arithmétique",
-    image: "./calculatrice_projet.png",
+    image: "/calculatrice_projet.png",
     description:
-      "Calculatrice graphique en Java développée pour la SAE S2 : gestion d’opérations de base, structure POO et interface utilisateur ergonomique.",
+      "Calculatrice graphique en Java développée pour la SAE S2 : gestion d’opérations de base, structure POO et interface utilisateur ergonomique.",
     tech: [{ icon: <FaJava className="text-red-400" />, name: "Java" }],
-    github: "https://github.com/RobertGriffaton/CalculatriceArithmetique  ",
+    github: "https://github.com/RobertGriffaton/CalculatriceArithmetique",
+    details:
+      "Développement d’une application Java pour renforcer ma compréhension de la programmation orientée objet et des interfaces graphiques.",
+    positifs: [
+      "Très bonne prise en main de la POO",
+      "Application stable et robuste",
+      "Ergonomie simple et intuitive",
+    ],
+    negatifs: ["Interface graphique améliorable", "Peu d’extensions prévues"],
+    perso:
+      "Ça m’a permis d’être plus à l’aise sur Java, surtout sur la structure du code et la rigueur.",
   },
   {
     title: "Santa Claus – Parcours du Père Noël",
-    image: "./santaclaus_projet.png",
+    image: "/santaclaus_projet.png",
     description:
       "Optimisation d’itinéraire en Python : algorithme pour calculer les meilleurs trajets du Père Noël, découverte des structures de données. Développé en binôme lors de la SAE S1.",
     tech: [{ icon: <SiPython className="text-blue-400" />, name: "Python" }],
     github: "https://github.com/RobertGriffaton",
+    details:
+      "Un projet fun et technique pour comprendre l’algorithmique (parcours de graphe, optimisation). Super challenge de début d’année !",
+    positifs: [
+      "Gros apprentissage des structures de données",
+      "Travail d’équipe efficace",
+      "Projet original et motivant",
+    ],
+    negatifs: ["Code parfois complexe à relire", "Peu d’interface utilisateur"],
+    perso:
+      "Premier projet où j’ai compris l’importance des algos et de la logique pure.",
   },
   {
     title: "Puissance 4",
-    image: "./puissance4_projet.png",
+    image: "/puissance4_projet.png",
     description:
-      "Réalisation d’un Puissance 4 digitalisé : logique de jeu, interface, personnalisation, et challenge algorithmique.",
+      "Réalisation d’un Puissance 4 digitalisé : logique de jeu, interface, personnalisation, et challenge algorithmique.",
     tech: [
       {
         icon: <SiJavascript className="text-yellow-400" />,
@@ -153,10 +219,23 @@ const projects = [
       { icon: <SiVuedotjs className="text-green-400" />, name: "Vue.js" },
     ],
     github: "https://github.com/RobertGriffaton",
+    details:
+      "J’ai décidé de coder mon jeu de société préféré : logique, détection de victoire, IA simple. Beaucoup de test sur l’UX pour que ça soit fun à jouer.",
+    positifs: [
+      "Projet ludique, fun à développer",
+      "Personnalisation facile",
+      "Permet de bien progresser sur JS/Vue",
+    ],
+    negatifs: [
+      "Pas de vraie IA avancée pour le moment",
+      "Responsive mobile à améliorer",
+    ],
+    perso:
+      "Un kif perso parce que j’adore le Puissance 4 (et battre mes potes dessus !)",
   },
   {
     title: "Memory Card - En Cours",
-    image: "./memorycard_projet.png",
+    image: "./memory_projet.png",
     description:
       "Jeu de memory en ligne sur le thème du football. Développement front-end, animations, et UX ludique.",
     tech: [
@@ -168,10 +247,23 @@ const projects = [
       },
     ],
     github: "https://github.com/RobertGriffaton",
+    details:
+      "Projet perso en cours pour lier ma passion du foot et le code. Focus sur le design, la fluidité des animations et l’accessibilité.",
+    positifs: [
+      "Animations réussies",
+      "Ambiance foot unique",
+      "Facile à prendre en main",
+    ],
+    negatifs: [
+      "Encore quelques bugs à corriger",
+      "Fonctionnalités à compléter",
+    ],
+    perso:
+      "Je le fais évoluer au fil de mes envies et des retours de mes potes fans de foot.",
   },
   {
     title: "Top Auto – En Cours",
-    image: "./topauto_projet.png",
+    image: "/topauto_projet.png",
     description:
       "Conception d’un site vitrine pour un garage : présentation de l’activité, services, véhicules en stock. Projet en cours pour un proche.",
     tech: [
@@ -184,6 +276,19 @@ const projects = [
       { icon: <FaReact className="text-sky-400" />, name: "React" },
     ],
     github: "https://github.com/RobertGriffaton",
+    details:
+      "Projet réel pour un proche, très concret : gestion des contenus, affichage des véhicules, contact facile. L’objectif est de proposer un site simple et pro.",
+    positifs: [
+      "Projet concret (utilisé en vrai !)",
+      "Découverte du design orienté client",
+      "Ajout de React pour les parties dynamiques",
+    ],
+    negatifs: [
+      "Gros travail sur le SEO à prévoir",
+      "Besoin de temps pour finir toutes les pages",
+    ],
+    perso:
+      "Une super occasion de rendre service et d’apprendre la gestion de projet web client.",
   },
 ];
 
@@ -274,46 +379,6 @@ function CompetenceCard({ comp }) {
   );
 }
 
-function ProjectCard({ project }) {
-  return (
-    <div className="bg-neutral-900 rounded-2xl overflow-hidden shadow-lg flex flex-col hover:scale-[1.03] transition-transform duration-300 group">
-      <div className="h-44 w-full overflow-hidden">
-        <img
-          src={project.image}
-          alt={`Aperçu du projet ${project.title}`}
-          className="object-cover w-full h-full group-hover:scale-105 transition-transform duration-500"
-        />
-      </div>
-      <div className="p-5 flex flex-col flex-1">
-        <h3 className="text-xl font-bold text-blue-400 mb-2">
-          {project.title}
-        </h3>
-        <p className="text-neutral-300 mb-3 flex-1">{project.description}</p>
-        <div className="flex flex-wrap gap-2 mb-4">
-          {project.tech.map((t, i) => (
-            <span
-              key={i}
-              className="bg-blue-800/80 text-xs px-2 py-1 rounded-full flex items-center gap-1"
-            >
-              {t.icon}
-              {t.name}
-            </span>
-          ))}
-        </div>
-        <a
-          href={project.github}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-semibold transition-colors mt-auto"
-        >
-          <FaGithub /> Voir sur GitHub
-        </a>
-      </div>
-    </div>
-  );
-}
-
-// --- INTEREST CARD ---
 function InterestCard({ icon, title, description }) {
   const [show, setShow] = useState(false);
   return (
@@ -342,14 +407,12 @@ function InterestCard({ icon, title, description }) {
 function SocialSidebar() {
   return (
     <div className="fixed left-8 top-1/2 -translate-y-1/2 z-50 hidden md:flex flex-col items-center gap-8">
-      {/* Photo en haut */}
       <img
-        src="./jsppp.jpg"
+        src="./costardpics.jpg"
         alt="Robert Griffaton"
         className="w-20 h-20 rounded-full border-4 border-blue-500 shadow-xl mb-4 object-cover hover:scale-105 transition-transform duration-300"
         style={{ boxShadow: "0 4px 24px 0 #0ea5e9" }}
       />
-      {/* Liens sociaux */}
       <a
         href="mailto:griffatonr@gmail.com"
         className="mb-2 bg-black/70 hover:bg-blue-500 p-3 rounded-full shadow-lg transition-colors duration-300"
@@ -378,13 +441,14 @@ function SocialSidebar() {
       >
         <FaLinkedin className="text-2xl text-blue-200" />
       </a>
-      {/* Ligne décorative */}
       <div className="w-1 h-20 bg-gradient-to-b from-blue-500 to-transparent mt-6 rounded-full" />
     </div>
   );
 }
 
 export default function Portfolio() {
+  const [showMoreAbout, setShowMoreAbout] = useState(false);
+
   const [scrolled, setScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState("");
   const [menuOpen, setMenuOpen] = useState(false);
@@ -570,13 +634,13 @@ export default function Portfolio() {
           className="relative bg-gradient-to-br from-black via-neutral-900 to-neutral-950 rounded-3xl max-w-5xl mx-auto flex flex-col md:flex-row items-center gap-8 p-8 mb-14 shadow-2xl"
           data-aos="fade-up"
         >
-          <div className="shrink-0 flex flex-col items-center md:items-start">
+          <div className="shrink-0 flex flex-col items-center">
             <img
-              src="./moimicro.jpg"
+              src="./picsmusee.webp"
               alt="Robert Griffaton"
               className="w-40 h-40 md:w-52 md:h-52 rounded-full object-cover border-4 border-blue-500 shadow-lg mb-4"
             />
-            <span className="text-blue-400 font-bold text-xl mt-2">
+            <span className="text-blue-400 font-bold text-xl mt-2 text-center">
               Robert Griffaton
             </span>
           </div>
@@ -599,6 +663,53 @@ export default function Portfolio() {
               objectif : rejoindre une école d’ingénieur et continuer à
               progresser.
             </p>
+
+            <button
+              onClick={() => setShowMoreAbout((v) => !v)}
+              className="mt-5 px-6 py-2 rounded-full bg-gradient-to-r from-blue-700 to-sky-400 text-white font-bold text-md shadow hover:scale-105 transition-all"
+            >
+              {showMoreAbout ? "Fermer" : "En savoir plus"}
+            </button>
+
+            <div
+              className={`overflow-hidden transition-all duration-500 ${
+                showMoreAbout
+                  ? "max-h-96 opacity-100 mt-5"
+                  : "max-h-0 opacity-0"
+              }`}
+            >
+              <div className="bg-neutral-900/80 rounded-xl p-5 mt-2 text-neutral-300 shadow-inner">
+                <ul className="list-disc ml-6 space-y-2">
+                  <li>
+                    <span className="font-semibold text-blue-400">
+                      Goût pour l’autonomie :
+                    </span>{" "}
+                    J’adore démarrer un projet de zéro et le mener à bien,
+                    apprendre de nouvelles techno seul ou en équipe.
+                  </li>
+                  <li>
+                    <span className="font-semibold text-blue-400">
+                      Soft skills :
+                    </span>{" "}
+                    rigoureux, créatif, sens du collectif, capacité à présenter
+                    ou vulgariser mes travaux.
+                  </li>
+                  <li>
+                    <span className="font-semibold text-blue-400">
+                      Autres centres d’intérêt :
+                    </span>
+                    musique, sport, jeux de stratégie (échecs), nouvelles
+                    technologies, voyages.
+                  </li>
+                  <li>
+                    <span className="font-semibold text-blue-400">
+                      Valeurs :
+                    </span>{" "}
+                    aider, transmettre, toujours progresser !
+                  </li>
+                </ul>
+              </div>
+            </div>
           </div>
         </section>
 
@@ -701,6 +812,93 @@ export default function Portfolio() {
             </div>
           </div>
         </section>
+        <section
+          id="softskills"
+          className="max-w-4xl mx-auto mt-12 px-4 py-8 bg-gradient-to-br from-black/90 via-neutral-900 to-neutral-950 rounded-3xl shadow-2xl"
+          data-aos="fade-up"
+        >
+          <h2 className="text-2xl md:text-3xl font-bold text-blue-400 mb-10 text-center tracking-tight">
+            Soft Skills
+          </h2>
+          <div className="grid md:grid-cols-2 gap-8">
+            {/* Communication */}
+            <div className="bg-neutral-900/80 rounded-2xl p-6 shadow flex flex-col gap-3 hover:scale-[1.03] transition-transform duration-300">
+              <div className="font-bold text-lg text-blue-300 mb-1">
+                Communication
+              </div>
+              <div className="text-neutral-200">
+                <span className="text-blue-400 font-semibold">Exemple :</span>{" "}
+                Lors de mon stage chez Ramsay Santé, j’ai animé des réunions
+                pour recueillir les besoins utilisateurs, puis présenté mes
+                avancées régulièrement à toute l’équipe. J’ai appris à rendre
+                mes messages clairs pour tous, même les non-informaticiens.
+              </div>
+            </div>
+            {/* Esprit d'équipe */}
+            <div className="bg-neutral-900/80 rounded-2xl p-6 shadow flex flex-col gap-3 hover:scale-[1.03] transition-transform duration-300">
+              <div className="font-bold text-lg text-green-300 mb-1">
+                Esprit d'équipe
+              </div>
+              <div className="text-neutral-200">
+                <span className="text-green-400 font-semibold">Exemple :</span>{" "}
+                Sur le projet ATM Chat (SAE S3), j’ai contribué à la réussite
+                commune : entraide entre membres, répartition claire des tâches,
+                résolution de conflits et code partagé sur GitHub pour avancer
+                ensemble efficacement.
+              </div>
+            </div>
+            {/* Adaptabilité */}
+            <div className="bg-neutral-900/80 rounded-2xl p-6 shadow flex flex-col gap-3 hover:scale-[1.03] transition-transform duration-300">
+              <div className="font-bold text-lg text-yellow-300 mb-1">
+                Adaptabilité
+              </div>
+              <div className="text-neutral-200">
+                <span className="text-yellow-400 font-semibold">Exemple :</span>{" "}
+                Première expérience professionnelle : adaptation rapide au
+                rythme, aux outils inconnus et à la diversité des profils, en
+                full présentiel alors que mes collègues alternaient télétravail.
+              </div>
+            </div>
+            {/* Esprit d'initiative */}
+            <div className="bg-neutral-900/80 rounded-2xl p-6 shadow flex flex-col gap-3 hover:scale-[1.03] transition-transform duration-300">
+              <div className="font-bold text-lg text-pink-300 mb-1">
+                Esprit d’initiative
+              </div>
+              <div className="text-neutral-200">
+                <span className="text-pink-400 font-semibold">Exemple :</span>{" "}
+                J’ai proposé des idées d’améliorations (UX, sécurité) sur le
+                projet Intranet Ramsay Santé, que j’ai ensuite mis en place
+                après validation, allant au-delà du cahier des charges initial.
+              </div>
+            </div>
+            {/* Curiosité / Apprentissage continu */}
+            <div className="bg-neutral-900/80 rounded-2xl p-6 shadow flex flex-col gap-3 hover:scale-[1.03] transition-transform duration-300">
+              <div className="font-bold text-lg text-purple-300 mb-1">
+                Curiosité & Apprentissage continu
+              </div>
+              <div className="text-neutral-200">
+                <span className="text-purple-400 font-semibold">Exemple :</span>{" "}
+                Passionné d’auto-formation : j’apprends régulièrement de
+                nouveaux frameworks (ex : Vue, React), ce qui me permet d’être
+                polyvalent sur mes projets étudiants ou perso.
+              </div>
+            </div>
+            {/* Organisation */}
+            <div className="bg-neutral-900/80 rounded-2xl p-6 shadow flex flex-col gap-3 hover:scale-[1.03] transition-transform duration-300">
+              <div className="font-bold text-lg text-emerald-300 mb-1">
+                Organisation
+              </div>
+              <div className="text-neutral-200">
+                <span className="text-emerald-400 font-semibold">
+                  Exemple :
+                </span>{" "}
+                Gestion de projet (intranet Ramsay, site vitrine Top Auto) :
+                planification, tableur comme Excel, priorisation des tâches pour
+                respecter les deadlines.
+              </div>
+            </div>
+          </div>
+        </section>
 
         {/* Bloc : Parcours scolaire & Objectifs */}
         <section
@@ -709,7 +907,7 @@ export default function Portfolio() {
           data-aos="fade-up"
         >
           <h2 className="text-2xl md:text-3xl font-bold text-blue-400 mb-10 text-center tracking-tight">
-            Mon Parcours & Mes Objectifs
+            Mon Parcours
           </h2>
           <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-8 relative">
             {/* Collège */}
@@ -814,19 +1012,17 @@ export default function Portfolio() {
             ))}
           </div>
         </section>
-
-        {/* Compétences BUT */}
         <section
           id="but-competences"
           className="max-w-4xl mx-auto my-16"
           data-aos="fade-up"
         >
           <h2 className="text-2xl font-bold text-blue-400 mb-8 text-center">
-            Compétences acquises lors de mon BUT Informatique
+            Mes compétences du BUT Informatique
           </h2>
           <div className="grid md:grid-cols-2 gap-7">
-            {butCompetences.map((comp, i) => (
-              <CompetenceCard comp={comp} key={i} />
+            {butCompetences.map((c, i) => (
+              <ButCompetenceCard key={i} {...c} />
             ))}
           </div>
         </section>
@@ -896,20 +1092,7 @@ export default function Portfolio() {
           </section>
 
           {/* Projets */}
-          <section
-            id="projects"
-            data-aos="fade-up"
-            className="bg-neutral-900/80 rounded-2xl p-8 shadow"
-          >
-            <h2 className="text-2xl font-bold text-blue-400 mb-7 flex items-center gap-2">
-              <FaGithub className="text-blue-400" /> Projets
-            </h2>
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {projects.map((project, i) => (
-                <ProjectCard key={i} project={project} />
-              ))}
-            </div>
-          </section>
+          <ProjectsSection projects={projects} />
 
           {/* Contact */}
           <section
