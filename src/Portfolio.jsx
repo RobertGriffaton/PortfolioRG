@@ -231,7 +231,7 @@ const projects = [
       "Responsive mobile à améliorer",
     ],
     perso:
-      "Un kif perso parce que j’adore le Puissance 4 (et battre mes potes dessus !)",
+      "Un plaisir personnel parce que j’aime le Puissance 4 depuis mon jeune âge.",
   },
   {
     title: "Memory Card - En Cours",
@@ -581,8 +581,7 @@ export default function Portfolio() {
           />
           <h1 className="text-4xl font-bold mb-2">Robert Griffaton</h1>
           <p className="text-md text-neutral-400 max-w-xl mb-2">
-            Étudiant en BUT Informatique passionné par le développement web et
-            logiciel. Curieux, rigoureux et orienté solution.
+            Étudiant en BUT Informatique
           </p>
           <ul className="flex justify-center gap-6 mt-4 text-xl">
             <li>
@@ -649,26 +648,26 @@ export default function Portfolio() {
               À propos de moi
             </h2>
             <p className="text-lg text-neutral-200 leading-relaxed mb-2">
-              Étudiant en BUT Informatique passionné par la tech, l’innovation
-              et la création. J’adore relever des défis, apprendre sans cesse et
-              partager des solutions simples à des problèmes complexes.
+              Passionné par la tech, la musique et tout ce qui touche au
+              numérique, je poursuis actuellement un BUT Informatique où je
+              m’épanouis à travers les projets web et logiciels.
             </p>
             <p className="text-neutral-400 mb-2">
-              Je travaille sur des projets web et logiciels, avec une forte
-              appétence pour le développement fullstack, l’UI moderne et la
-              gestion de projet en équipe.
+              J’ai un vrai goût pour le développement fullstack, le design
+              d’interfaces modernes, et le travail en équipe où la bonne
+              ambiance est aussi importante que la rigueur.
             </p>
             <p className="text-neutral-400">
-              Actuellement à la recherche de nouvelles opportunités, mon
-              objectif : rejoindre une école d’ingénieur et continuer à
-              progresser.
+              Pour la suite, je recherche activement une alternance pour ma 3
+              <sup>ème</sup> année, avant de viser une école d’ingénieur pour
+              continuer à progresser et approfondir mes compétences.
             </p>
 
             <button
               onClick={() => setShowMoreAbout((v) => !v)}
               className="mt-5 px-6 py-2 rounded-full bg-gradient-to-r from-blue-700 to-sky-400 text-white font-bold text-md shadow hover:scale-105 transition-all"
             >
-              {showMoreAbout ? "Fermer" : "En savoir plus"}
+              {showMoreAbout ? "Fermer" : "Ce dont je suis le plus fier"}
             </button>
 
             <div
@@ -679,33 +678,49 @@ export default function Portfolio() {
               }`}
             >
               <div className="bg-neutral-900/80 rounded-xl p-5 mt-2 text-neutral-300 shadow-inner">
+                <h3 className="text-xl text-blue-400 font-bold mb-3">
+                  Ce dont je suis le plus fier
+                </h3>
                 <ul className="list-disc ml-6 space-y-2">
                   <li>
                     <span className="font-semibold text-blue-400">
-                      Goût pour l’autonomie :
+                      Projet SAE Chat (ATM Chat)&nbsp;:
                     </span>{" "}
-                    J’adore démarrer un projet de zéro et le mener à bien,
-                    apprendre de nouvelles techno seul ou en équipe.
+                    Avoir développé en équipe une application de messagerie
+                    collaborative en fullstack. Ça m’a vraiment permis de monter
+                    en compétences sur la gestion de projet, la communication et
+                    la technique pure. C’est LE projet qui m’a le plus challengé
+                    et rendu fier de ce que je sais faire.
                   </li>
                   <li>
                     <span className="font-semibold text-blue-400">
-                      Soft skills :
+                      Mon stage chez Ramsay Santé&nbsp;:
                     </span>{" "}
-                    rigoureux, créatif, sens du collectif, capacité à présenter
-                    ou vulgariser mes travaux.
+                    Première immersion dans le monde pro, où j’ai eu la
+                    responsabilité de réaliser un vrai projet de A à Z. J’ai su
+                    m’adapter, présenter mon travail, écouter et prendre des
+                    initiatives, et j’ai reçu des retours très positifs.
                   </li>
                   <li>
                     <span className="font-semibold text-blue-400">
-                      Autres centres d’intérêt :
-                    </span>
-                    musique, sport, jeux de stratégie (échecs), nouvelles
-                    technologies, voyages.
+                      Ma progression scolaire et mes résultats&nbsp;:
+                    </span>{" "}
+                    Je suis fier d’avoir eu un bulletin solide et des notes
+                    constantes (voire en progression) chaque semestre, notamment
+                    en informatique et en maths, où j’ai réussi à maintenir un
+                    bon niveau malgré la montée en difficulté. Les maths, c’est
+                    une vraie fierté, car j’ai toujours cherché à aller au bout
+                    des raisonnements et à progresser.
                   </li>
                   <li>
                     <span className="font-semibold text-blue-400">
-                      Valeurs :
+                      Mon autonomie et ma motivation&nbsp;:
                     </span>{" "}
-                    aider, transmettre, toujours progresser !
+                    Je n’hésite jamais à aller plus loin, à approfondir ce qu’on
+                    voit en cours, à chercher à comprendre par moi-même. Cette
+                    capacité à avancer seul (tout en travaillant en équipe quand
+                    il le faut), c’est ce qui m’a permis de progresser
+                    rapidement et de confirmer mon choix de parcours.
                   </li>
                 </ul>
               </div>
