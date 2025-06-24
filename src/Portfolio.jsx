@@ -900,7 +900,6 @@ export default function Portfolio() {
           </div>
         </section>
 
-        {/* Bloc : Parcours scolaire & Objectifs */}
         <section
           id="parcours"
           className="max-w-6xl mx-auto my-12 px-4 py-8 bg-neutral-900/80 rounded-3xl shadow-xl"
@@ -965,7 +964,7 @@ export default function Portfolio() {
                 </div>
                 <div className="text-sky-400 font-semibold text-sm mb-1">
                   Réalisation d'applications : conception, développement,
-                  validation{" "}
+                  validation
                 </div>
                 <div className="text-neutral-200 text-sm mb-1">
                   IUT Villetaneuse - Sorbonne Paris Nord
@@ -994,6 +993,52 @@ export default function Portfolio() {
                 <div className="text-xs text-blue-400">À partir de 2026</div>
               </div>
             </div>
+          </div>
+
+          {/* Ajout du bloc sur l’évolution entre BUT1 et BUT2 */}
+          <div className="mt-12 mx-auto max-w-5xl bg-neutral-800/80 rounded-2xl shadow-lg p-7 text-neutral-200">
+            <h3 className="text-xl font-bold text-blue-400 mb-3">
+              Mon évolution entre le BUT1 et le BUT2
+            </h3>
+            <p className="mb-2">
+              La transition entre la première et la deuxième année de BUT
+              Informatique a été un vrai tournant dans mon parcours. J’ai acquis
+              des{" "}
+              <span className="text-blue-400 font-semibold">
+                bonnes pratiques
+              </span>{" "}
+              en développement, comme l’importance de la rigueur dans le code,
+              la documentation, la gestion de projet et l’utilisation d’outils
+              pros (Git, Figma...).
+            </p>
+            <p className="mb-2">
+              J’ai surtout pris conscience de la{" "}
+              <span className="text-emerald-400 font-semibold">
+                valeur du travail en équipe
+              </span>{" "}
+              et de la nécessité d’apprendre en continu, que ce soit à travers
+              les cours, les projets comme la SAE S3 qui est mon projet le plus
+              concret.
+            </p>
+            <p className="mb-2">
+              C’est aussi durant cette période que j’ai confirmé mon choix de{" "}
+              <span className="text-yellow-400 font-semibold">
+                m’orienter vers l’informatique
+              </span>
+               . Dans la gestion de projet, l'IA et le développement logiciel je
+              me sens à ma place dans ces domaines qui allie technique,
+              créativité et résolution de problèmes.
+            </p>
+            <p>
+              Grâce à mon{" "}
+              <span className="text-blue-400 font-semibold">
+                stage en entreprise
+              </span>
+              , j’ai pu découvrir le monde professionnel, confronter mes acquis
+              à la réalité du terrain, et comprendre les attentes des
+              entreprises. Cette expérience m’a motivé à continuer dans cette
+              voie et à viser une école d’ingénieur par la suite.
+            </p>
           </div>
         </section>
 
